@@ -1,5 +1,7 @@
 package com.bookingapp.tareq.data
 
+import com.bookingapp.tareq.R
+
 object FakeData {
     val flight = Flight(
         startCountry = "Bengaluru",
@@ -15,5 +17,12 @@ object FakeData {
         estimatedFlightTime = "3h 20m",
         gate = "B7",
         seat = "21A"
+    )
+
+    val offersImage = listOf(
+        R.drawable.photo_one,
+        R.drawable.photo_two,
+        R.drawable.photo_three,
+        R.drawable.photo_four,
     )
 }

@@ -33,7 +33,8 @@ class FlightViewModel @Inject constructor() : ViewModel() {
                 ),
                 startDate = FakeData.flight.departDate,
                 endDate = FakeData.flight.arriveDate,
-                flightClass = FakeData.flight.flightClass
+                flightClass = FakeData.flight.flightClass,
+                offersImage = FakeData.offersImage
             )
         }
     }
