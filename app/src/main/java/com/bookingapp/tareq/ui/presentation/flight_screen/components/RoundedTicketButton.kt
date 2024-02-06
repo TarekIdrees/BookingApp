@@ -1,6 +1,8 @@
 package com.bookingapp.tareq.ui.presentation.flight_screen.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -29,7 +31,7 @@ fun RoundedTicketButton(
 ) {
     if (isThereBorder) {
         OutlinedButton(
-            modifier = modifier,
+            modifier = modifier.fillMaxWidth().height(54.dp),
             onClick = onClick,
             colors = ButtonDefaults.buttonColors(containerColor = background),
             border = BorderStroke(borderWidth, borderColor)
@@ -41,7 +43,7 @@ fun RoundedTicketButton(
         }
     } else {
         Button(
-            modifier = modifier,
+            modifier = modifier.fillMaxWidth().height(54.dp),
             onClick = onClick,
             colors = ButtonDefaults.buttonColors(containerColor = background),
         ) {
