@@ -1,4 +1,4 @@
-package com.bookingapp.tareq.ui
+package com.bookingapp.tareq.ui.presentation.common_composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
