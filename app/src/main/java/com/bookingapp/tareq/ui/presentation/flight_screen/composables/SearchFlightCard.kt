@@ -1,4 +1,4 @@
-package com.bookingapp.tareq.ui.presentation.flight_screen.components
+package com.bookingapp.tareq.ui.presentation.flight_screen.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

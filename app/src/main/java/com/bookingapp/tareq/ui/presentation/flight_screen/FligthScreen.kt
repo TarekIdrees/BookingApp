@@ -32,13 +32,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bookingapp.tareq.R
 import com.bookingapp.tareq.ui.BookingTopAppbar
-import com.bookingapp.tareq.ui.presentation.flight_screen.components.AirplaneRouteDisplay
-import com.bookingapp.tareq.ui.presentation.flight_screen.components.DisplayText
-import com.bookingapp.tareq.ui.presentation.flight_screen.components.FlightClassCard
-import com.bookingapp.tareq.ui.presentation.flight_screen.components.FlightInformationCard
-import com.bookingapp.tareq.ui.presentation.flight_screen.components.RoundedTicketButton
-import com.bookingapp.tareq.ui.presentation.flight_screen.components.SearchFlightCard
-import com.bookingapp.tareq.ui.presentation.flight_screen.components.TimeScaffold
+import com.bookingapp.tareq.ui.presentation.flight_screen.composables.AirplaneRouteDisplay
+import com.bookingapp.tareq.ui.presentation.flight_screen.composables.DisplayText
+import com.bookingapp.tareq.ui.presentation.flight_screen.composables.FlightClassCard
+import com.bookingapp.tareq.ui.presentation.flight_screen.composables.FlightInformationCard
+import com.bookingapp.tareq.ui.presentation.flight_screen.composables.RoundedTicketButton
+import com.bookingapp.tareq.ui.presentation.flight_screen.composables.SearchFlightCard
+import com.bookingapp.tareq.ui.presentation.flight_screen.composables.TimeScaffold
 import com.bookingapp.tareq.ui.theme.Black80
 import com.bookingapp.tareq.ui.theme.BookingAppTheme
 

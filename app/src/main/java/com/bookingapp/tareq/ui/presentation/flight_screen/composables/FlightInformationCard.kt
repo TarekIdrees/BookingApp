@@ -1,4 +1,4 @@
-package com.bookingapp.tareq.ui.presentation.flight_screen.components
+package com.bookingapp.tareq.ui.presentation.flight_screen.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
