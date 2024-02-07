@@ -2,7 +2,6 @@ package com.bookingapp.tareq.ui.presentation.flight_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,12 +30,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bookingapp.tareq.R
-import com.bookingapp.tareq.ui.BookingTopAppbar
+import com.bookingapp.tareq.ui.presentation.common_composables.BookingTopAppbar
+import com.bookingapp.tareq.ui.presentation.common_composables.RowHeadline
 import com.bookingapp.tareq.ui.presentation.flight_screen.composables.AirplaneRouteDisplay
 import com.bookingapp.tareq.ui.presentation.flight_screen.composables.DisplayText
 import com.bookingapp.tareq.ui.presentation.flight_screen.composables.FlightClassCard
 import com.bookingapp.tareq.ui.presentation.flight_screen.composables.FlightInformationCard
-import com.bookingapp.tareq.ui.presentation.flight_screen.composables.RoundedTicketButton
+import com.bookingapp.tareq.ui.presentation.common_composables.RoundedTicketButton
 import com.bookingapp.tareq.ui.presentation.flight_screen.composables.SearchFlightCard
 import com.bookingapp.tareq.ui.presentation.flight_screen.composables.TimeScaffold
 import com.bookingapp.tareq.ui.theme.Black80
@@ -142,18 +142,7 @@ private fun FlightContent(
             Spacer(modifier = Modifier.height(16.dp))
             SearchFlightCard()
             Spacer(modifier = Modifier.height(16.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = "Offers", style = MaterialTheme.typography.displayMedium)
-                Text(
-                    modifier = Modifier.clickable { },
-                    text = "See All",
-                    style = MaterialTheme.typography.labelSmall.copy(color = Color.White)
-                )
-            }
+            RowHeadline(headline = "Offers")
             Spacer(modifier = Modifier.height(4.dp))
             state.offersImage.forEach { id ->
                 Image(
