@@ -25,4 +25,10 @@ object FakeData {
         R.drawable.photo_three,
         R.drawable.photo_four,
     )
+
+    val travelerInformation = Traveler(
+        name = "Tareq Idris",
+        photo = R.drawable.tareq_idris,
+        rank = "Premium"
+    )
 }
