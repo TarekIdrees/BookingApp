@@ -60,5 +60,17 @@ val Typography = Typography(
         fontSize = 28.sp,
         fontFamily = RedHat,
         fontWeight = FontWeight.Bold
+    ),
+    bodyLarge = TextStyle(
+        color = Brand,
+        fontSize = 42.sp,
+        fontFamily = RedHat,
+        fontWeight = FontWeight.Medium
+    ),
+    bodySmall = TextStyle(
+        color = Color.White,
+        fontSize = 16.sp,
+        fontFamily = RedHat,
+        fontWeight = FontWeight.Normal
     )
 )

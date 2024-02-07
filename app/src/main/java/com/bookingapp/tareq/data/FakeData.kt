@@ -16,7 +16,9 @@ object FakeData {
         flightClass = "Business",
         estimatedFlightTime = "3h 20m",
         gate = "B7",
-        seat = "21A"
+        seat = "21A",
+        barcode = R.drawable.barcode,
+        price = "170"
     )
 
     val offersImage = listOf(

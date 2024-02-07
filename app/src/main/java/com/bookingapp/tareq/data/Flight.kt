@@ -14,5 +14,6 @@ data class Flight(
     val estimatedFlightTime: String = "",
     val gate: String = "",
     val seat: String = "",
-    val price: String = ""
+    val price: String = "",
+    val barcode: Int = 0,
 )
