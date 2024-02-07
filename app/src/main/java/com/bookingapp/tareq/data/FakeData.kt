@@ -1,6 +1,9 @@
 package com.bookingapp.tareq.data
 
 import com.bookingapp.tareq.R
+import com.bookingapp.tareq.data.models.Destination
+import com.bookingapp.tareq.data.models.Flight
+import com.bookingapp.tareq.data.models.Traveler
 
 object FakeData {
     val flight = Flight(
