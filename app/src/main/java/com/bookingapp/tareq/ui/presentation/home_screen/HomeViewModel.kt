@@ -21,7 +21,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             it.copy(
                 travelerName = FakeData.travelerInformation.name,
                 travelerPhoto = FakeData.travelerInformation.photo,
-                travelerRank = FakeData.travelerInformation.rank
+                travelerRank = FakeData.travelerInformation.rank,
+                destinationPlaces = FakeData.destinationPlaces.map { it.toDestinationUiState() },
+                holidayImages = FakeData.holidayImages
             )
         }
     }

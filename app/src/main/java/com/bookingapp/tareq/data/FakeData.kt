@@ -28,7 +28,34 @@ object FakeData {
 
     val travelerInformation = Traveler(
         name = "Tareq Idris",
-        photo = R.drawable.tareq_idris,
+        photo = R.drawable.tarek_1,
         rank = "Premium"
+    )
+
+    val destinationPlaces = listOf(
+        Destination(
+            "Maldive",
+            R.drawable.photo_one
+        ),
+        Destination(
+            "Paris",
+            R.drawable.photo_two
+        ),
+        Destination(
+            "Malissia",
+            R.drawable.photo_three
+        ),
+        Destination(
+            "Istanbul",
+            R.drawable.photo_four
+        )
+    )
+
+    val holidayImages = listOf(
+        R.drawable.guinea,
+        R.drawable.burkina_faso,
+        R.drawable.kiribat_unesco,
+        R.drawable.sierra_leone,
+        R.drawable.mautitus
     )
 }
