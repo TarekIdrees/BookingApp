@@ -1,6 +1,7 @@
 package com.bookingapp.tareq.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -47,5 +48,17 @@ val Typography = Typography(
         fontSize = 22.sp,
         fontFamily = RedHat,
         fontWeight = FontWeight.SemiBold
+    ),
+    headlineSmall = TextStyle(
+        color = White,
+        fontSize = 14.sp,
+        fontFamily = RedHat,
+        fontWeight = FontWeight.Normal
+    ),
+    headlineLarge = TextStyle(
+        color = Color.Black,
+        fontSize = 28.sp,
+        fontFamily = RedHat,
+        fontWeight = FontWeight.Bold
     )
 )
