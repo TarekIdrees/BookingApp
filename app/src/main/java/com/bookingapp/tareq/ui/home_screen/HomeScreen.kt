@@ -1,7 +1,9 @@
 package com.bookingapp.tareq.ui.home_screen
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -23,13 +25,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bookingapp.tareq.R
 import com.bookingapp.tareq.ui.common_composables.BookingTopAppbar
+import com.bookingapp.tareq.ui.common_composables.NavigationHandler
 import com.bookingapp.tareq.ui.common_composables.RowHeadline
+import com.bookingapp.tareq.ui.flight_screen.navigateToFlight
 import com.bookingapp.tareq.ui.home_screen.composables.DestinationItem
 import com.bookingapp.tareq.ui.home_screen.composables.TravelerInformationRow
 import com.bookingapp.tareq.ui.home_screen.composables.TripBox
@@ -40,12 +45,32 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    val context = LocalContext.current
 
-    HomeContent(state)
+    NavigationHandler(effects = viewModel.effect, handleEffect = { effect, navController ->
+        when (effect) {
+            HomeUiEffect.BackButtonEffect -> {
+                navController.popBackStack()
+            }
+
+            HomeUiEffect.NavigationToFlightEffect -> {
+                navController.navigateToFlight()
+            }
+
+            HomeUiEffect.ShowInCompleteScreenToastEffect -> {
+                Toast.makeText(
+                    context,
+                    "The screen not implemented yet",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    })
+    HomeContent(viewModel,state)
 }
 
 @Composable
-private fun HomeContent(state: HomeUiState) {
+private fun HomeContent(viewModel: HomeViewModel, state: HomeUiState) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +84,7 @@ private fun HomeContent(state: HomeUiState) {
                     .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = { viewModel.onClickBackButton() }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_left_arrow),
                         contentDescription = "back arrow",
@@ -71,15 +96,26 @@ private fun HomeContent(state: HomeUiState) {
         }
         item {
             Spacer(modifier = Modifier.height(16.dp))
-            TravelerInformationRow(modifier = Modifier.padding(horizontal = 16.dp), state = state)
+            TravelerInformationRow(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                state = state,
+                onClickProfile = viewModel::onClickProfile
+            )
         }
         item {
             Spacer(modifier = Modifier.height(16.dp))
-            TripBox(modifier = Modifier.padding(horizontal = 16.dp))
+            TripBox(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                onClickFindTripButton = viewModel::onClickFindTrip
+            )
         }
         item {
             Spacer(modifier = Modifier.height(16.dp))
-            RowHeadline(modifier = Modifier.padding(horizontal = 16.dp), headline = "Destination")
+            RowHeadline(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                headline = "Destination",
+                onClickSeeAll = viewModel::onClickDestinationSeeAll
+            )
         }
         item {
             Spacer(modifier = Modifier.height(22.dp))
@@ -94,7 +130,8 @@ private fun HomeContent(state: HomeUiState) {
                     item {
                         DestinationItem(
                             destinationName = it.destinationName,
-                            destinationPhoto = painterResource(id = it.destinationPhoto)
+                            destinationPhoto = painterResource(id = it.destinationPhoto),
+                            onClickCard = viewModel::onClickDestinationCard
                         )
                     }
                 }
@@ -104,7 +141,8 @@ private fun HomeContent(state: HomeUiState) {
             Spacer(modifier = Modifier.height(16.dp))
             RowHeadline(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                headline = "Holiday Packages"
+                headline = "Holiday Packages",
+                onClickSeeAll = viewModel::onClickHolidaySeeAll
             )
         }
         item {
@@ -115,7 +153,8 @@ private fun HomeContent(state: HomeUiState) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 8.dp, start = 16.dp, end = 16.dp)
-                    .clip(RoundedCornerShape(16.dp)),
+                    .clip(RoundedCornerShape(16.dp))
+                    .clickable { viewModel.onClickHolidayCard() },
                 painter = painterResource(id = image),
                 contentDescription = "holiday photo",
                 contentScale = ContentScale.Crop

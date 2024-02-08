@@ -1,16 +1,12 @@
 package com.bookingapp.tareq.ui.home_screen
 
-import androidx.lifecycle.ViewModel
 import com.bookingapp.tareq.data.FakeData
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.bookingapp.tareq.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor() : ViewModel() {
-
-    private var _state = MutableStateFlow(HomeUiState())
-    val state = _state.asStateFlow()
+class HomeViewModel @Inject constructor() : BaseViewModel<HomeUiState, HomeUiEffect>(HomeUiState()),
+    HomeInteractionListener {
 
     init {
         getTravelerInformation()
@@ -26,5 +22,33 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 holidayImages = FakeData.holidayImages
             )
         }
+    }
+
+    override fun onClickFindTrip() {
+        effectActionExecutor(_effect, HomeUiEffect.NavigationToFlightEffect)
+    }
+
+    override fun onClickProfile() {
+        effectActionExecutor(_effect, HomeUiEffect.ShowInCompleteScreenToastEffect)
+    }
+
+    override fun onClickDestinationCard() {
+        effectActionExecutor(_effect, HomeUiEffect.ShowInCompleteScreenToastEffect)
+    }
+
+    override fun onClickDestinationSeeAll() {
+        effectActionExecutor(_effect, HomeUiEffect.ShowInCompleteScreenToastEffect)
+    }
+
+    override fun onClickHolidayCard() {
+        effectActionExecutor(_effect, HomeUiEffect.ShowInCompleteScreenToastEffect)
+    }
+
+    override fun onClickHolidaySeeAll() {
+        effectActionExecutor(_effect, HomeUiEffect.ShowInCompleteScreenToastEffect)
+    }
+
+    override fun onClickBackButton() {
+        effectActionExecutor(_effect, HomeUiEffect.BackButtonEffect)
     }
 }

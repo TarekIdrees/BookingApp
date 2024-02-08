@@ -22,7 +22,7 @@ import com.bookingapp.tareq.ui.theme.Brand
 @Composable
 fun SearchFlightCard(
     modifier: Modifier = Modifier,
-    onClickButton: () -> Unit = {}
+    onClickButton: () -> Unit
 ) {
     Card(
         modifier = modifier
@@ -48,6 +48,6 @@ fun SearchFlightCard(
 @Composable
 fun SearchFlightCardPreview() {
     BookingAppTheme {
-        SearchFlightCard()
+        SearchFlightCard(onClickButton = {})
     }
 }

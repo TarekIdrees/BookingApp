@@ -1,6 +1,7 @@
 package com.bookingapp.tareq.ui.home_screen.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,7 +27,8 @@ import com.bookingapp.tareq.ui.home_screen.HomeUiState
 @Composable
 fun TravelerInformationRow(
     modifier: Modifier = Modifier,
-    state: HomeUiState
+    state: HomeUiState,
+    onClickProfile: () -> Unit
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -35,7 +37,8 @@ fun TravelerInformationRow(
         Image(
             modifier = Modifier
                 .size(66.dp)
-                .clip(CircleShape),
+                .clip(CircleShape)
+                .clickable { onClickProfile() },
             painter = painterResource(id = state.travelerPhoto),
             contentDescription = "traveler photo",
             contentScale = ContentScale.Crop
@@ -44,6 +47,7 @@ fun TravelerInformationRow(
             modifier = Modifier.align(Alignment.CenterVertically)
         ) {
             Text(
+                modifier = Modifier.clickable { onClickProfile() },
                 text = state.travelerName,
                 style = MaterialTheme.typography.displaySmall.copy(color = Color.White)
             )
@@ -64,6 +68,7 @@ fun TravelerInformationRowPreview() {
             travelerPhoto = R.drawable.tarek_1,
             travelerName = "Tareq Idris",
             travelerRank = "Premium"
-        )
+        ),
+        onClickProfile = {}
     )
 }

@@ -1,18 +1,15 @@
 package com.bookingapp.tareq.ui.flight_screen
 
-import androidx.lifecycle.ViewModel
 import com.bookingapp.tareq.data.FakeData
+import com.bookingapp.tareq.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class FlightViewModel @Inject constructor() : ViewModel() {
-
-    private var _state = MutableStateFlow(FlightScreenUiState())
-    val state = _state.asStateFlow()
+class FlightViewModel @Inject constructor() : BaseViewModel<FlightScreenUiState, FlightUiEffect>(
+    FlightScreenUiState()
+), FlightInteractionListener {
 
     init {
         getFlightInformation()
@@ -37,5 +34,25 @@ class FlightViewModel @Inject constructor() : ViewModel() {
                 offersImage = FakeData.offersImage
             )
         }
+    }
+
+    override fun onClickOneWayButton() {
+        effectActionExecutor(_effect, FlightUiEffect.NavigationToTicketEffect)
+    }
+
+    override fun onClickRoundTripButton() {
+        effectActionExecutor(_effect, FlightUiEffect.NavigationToTicketEffect)
+    }
+
+    override fun onClickSearchFlightButton() {
+        effectActionExecutor(_effect, FlightUiEffect.showInCompleteScreenToast)
+    }
+
+    override fun onClickOfferCard() {
+        effectActionExecutor(_effect, FlightUiEffect.showInCompleteScreenToast)
+    }
+
+    override fun onClickOffersSeeAll() {
+        effectActionExecutor(_effect, FlightUiEffect.showInCompleteScreenToast)
     }
 }

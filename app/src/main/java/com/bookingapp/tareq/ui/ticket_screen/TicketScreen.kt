@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bookingapp.tareq.R
+import com.bookingapp.tareq.ui.common_composables.NavigationHandler
 import com.bookingapp.tareq.ui.ticket_screen.comosables.FlightDetailsCard
 import com.bookingapp.tareq.ui.ticket_screen.comosables.FlightInformationRow
 
@@ -28,12 +29,16 @@ import com.bookingapp.tareq.ui.ticket_screen.comosables.FlightInformationRow
 fun TicketScreen(viewModel: TicketViewModel = hiltViewModel()) {
 
     val state by viewModel.state.collectAsState()
-
-    TicketContent(state)
+    NavigationHandler(effects = viewModel.effect, handleEffect = { effect, navController ->
+        when (effect) {
+            TicketUiEffect.BackButtonEffect -> navController.popBackStack()
+        }
+    })
+    TicketContent(viewModel, state)
 }
 
 @Composable
-fun TicketContent(state: TicketUiState) {
+fun TicketContent(viewModel: TicketViewModel, state: TicketUiState) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,7 +47,7 @@ fun TicketContent(state: TicketUiState) {
         horizontalAlignment = Alignment.Start
     ) {
         Icon(
-            modifier = Modifier.clickable { },
+            modifier = Modifier.clickable { viewModel.onClickBackButton() },
             painter = painterResource(id = R.drawable.ic_left_arrow),
             contentDescription = "back arrow",
             tint = Color.White

@@ -14,7 +14,8 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun RowHeadline(
     modifier: Modifier = Modifier,
-    headline: String
+    headline: String,
+    onClickSeeAll: () -> Unit
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -23,7 +24,7 @@ fun RowHeadline(
     ) {
         Text(text = headline, style = MaterialTheme.typography.displayMedium)
         Text(
-            modifier = Modifier.clickable { },
+            modifier = Modifier.clickable { onClickSeeAll() },
             text = "See All",
             style = MaterialTheme.typography.labelSmall.copy(color = Color.White)
         )

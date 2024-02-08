@@ -1,16 +1,14 @@
 package com.bookingapp.tareq.ui.ticket_screen
 
-import androidx.lifecycle.ViewModel
+
 import com.bookingapp.tareq.data.FakeData
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.bookingapp.tareq.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
-class TicketViewModel @Inject constructor() : ViewModel() {
-
-    private val _state = MutableStateFlow(TicketUiState())
-    val state = _state.asStateFlow()
+class TicketViewModel @Inject constructor() : BaseViewModel<TicketUiState, TicketUiEffect>(
+    TicketUiState()
+), TicketInteractionListener {
 
     init {
         getFlightInformation()
@@ -24,5 +22,9 @@ class TicketViewModel @Inject constructor() : ViewModel() {
                 flightInformation = FakeData.flight.toFlightUiState()
             )
         }
+    }
+
+    override fun onClickBackButton() {
+        effectActionExecutor(_effect, TicketUiEffect.BackButtonEffect)
     }
 }

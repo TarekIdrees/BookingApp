@@ -1,7 +1,9 @@
 package com.bookingapp.tareq.ui.flight_screen
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,12 +27,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bookingapp.tareq.R
 import com.bookingapp.tareq.ui.common_composables.BookingTopAppbar
+import com.bookingapp.tareq.ui.common_composables.NavigationHandler
 import com.bookingapp.tareq.ui.common_composables.RowHeadline
 import com.bookingapp.tareq.ui.flight_screen.composables.AirplaneRouteDisplay
 import com.bookingapp.tareq.ui.flight_screen.composables.DisplayText
@@ -41,17 +45,30 @@ import com.bookingapp.tareq.ui.flight_screen.composables.SearchFlightCard
 import com.bookingapp.tareq.ui.flight_screen.composables.TimeScaffold
 import com.bookingapp.tareq.ui.theme.Black80
 import com.bookingapp.tareq.ui.theme.BookingAppTheme
+import com.bookingapp.tareq.ui.ticket_screen.navigateToTicket
 
 @Composable
 fun FlightScreen(
     viewModel: FlightViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    FlightContent(state = state)
+    val context = LocalContext.current
+    NavigationHandler(effects = viewModel.effect, handleEffect = { effect, navController ->
+        when (effect) {
+            FlightUiEffect.NavigationToTicketEffect -> navController.navigateToTicket()
+            FlightUiEffect.showInCompleteScreenToast -> Toast.makeText(
+                context,
+                "The screen not implemented yet",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    })
+    FlightContent(viewModel, state = state)
 }
 
 @Composable
 private fun FlightContent(
+    viewModel: FlightViewModel,
     state: FlightScreenUiState
 ) {
     val scrollState = rememberScrollState()
@@ -125,14 +142,16 @@ private fun FlightContent(
                     modifier = Modifier
                         .weight(0.5f)
                         .padding(end = 16.dp),
-                    text = "One Way"
+                    text = "One Way",
+                    onClick = viewModel::onClickOneWayButton
                 )
                 RoundedTicketButton(
                     modifier = Modifier.weight(0.5f),
                     text = "Round Trip",
                     isThereBorder = true,
                     textColor = Color.Black,
-                    background = Color.White
+                    background = Color.White,
+                    onClick = viewModel::onClickRoundTripButton
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -140,16 +159,17 @@ private fun FlightContent(
             Spacer(modifier = Modifier.height(16.dp))
             FlightClassCard(flightClass = state.flightClass)
             Spacer(modifier = Modifier.height(16.dp))
-            SearchFlightCard()
+            SearchFlightCard(onClickButton = viewModel::onClickSearchFlightButton)
             Spacer(modifier = Modifier.height(16.dp))
-            RowHeadline(headline = "Offers")
+            RowHeadline(headline = "Offers", onClickSeeAll = viewModel::onClickOffersSeeAll)
             Spacer(modifier = Modifier.height(4.dp))
             state.offersImage.forEach { id ->
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
-                        .clip(RoundedCornerShape(16.dp)),
+                        .clip(RoundedCornerShape(16.dp))
+                        .clickable { viewModel.onClickOfferCard() },
                     painter = painterResource(id = id),
                     contentDescription = "offer photo",
                     contentScale = ContentScale.Crop

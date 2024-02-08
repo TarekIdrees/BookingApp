@@ -27,7 +27,8 @@ import com.bookingapp.tareq.ui.theme.Brand
 
 @Composable
 fun TripBox(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickFindTripButton: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -67,7 +68,8 @@ fun TripBox(
                 modifier = Modifier.padding(end = 16.dp),
                 text = "Find Trip",
                 textColor = Brand,
-                background = Color.Black
+                background = Color.Black,
+                onClick = onClickFindTripButton
             )
         }
 

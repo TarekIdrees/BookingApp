@@ -2,6 +2,7 @@ package com.bookingapp.tareq.ui.home_screen.composables
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -25,10 +26,11 @@ import com.bookingapp.tareq.R
 fun DestinationItem(
     modifier: Modifier = Modifier,
     destinationPhoto: Painter,
-    destinationName: String
+    destinationName: String,
+    onClickCard: () -> Unit
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.clickable { onClickCard() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
@@ -52,6 +54,7 @@ fun DestinationItem(
 private fun DestinationItemPreview() {
     DestinationItem(
         destinationPhoto = painterResource(id = R.drawable.photo_one),
-        destinationName = "Maldive"
+        destinationName = "Maldive",
+        onClickCard = {}
     )
 }
