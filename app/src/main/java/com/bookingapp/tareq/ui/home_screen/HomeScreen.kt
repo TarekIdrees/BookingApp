@@ -50,7 +50,7 @@ fun HomeScreen(
     NavigationHandler(effects = viewModel.effect, handleEffect = { effect, navController ->
         when (effect) {
             HomeUiEffect.BackButtonEffect -> {
-                navController.popBackStack()
+                navController.navigateUp()
             }
 
             HomeUiEffect.NavigationToFlightEffect -> {

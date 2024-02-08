@@ -31,7 +31,7 @@ fun TicketScreen(viewModel: TicketViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsState()
     NavigationHandler(effects = viewModel.effect, handleEffect = { effect, navController ->
         when (effect) {
-            TicketUiEffect.BackButtonEffect -> navController.popBackStack()
+            TicketUiEffect.BackButtonEffect -> navController.navigateUp()
         }
     })
     TicketContent(viewModel, state)
